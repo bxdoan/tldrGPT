@@ -8,8 +8,8 @@ load_dotenv()
 
 API_KEY = os.environ.get('API_KEY')
 MAX_TOKENS = os.environ.get('MAX_TOKENS')
-MODEL = 'text-davinci-003'
-URL = f"https://api.openai.com/v1/completions"
+MODEL = 'gpt-3.5-turbo'
+URL = f"https://api.openai.com/v1/chat/completions"
 
 
 def chat_with_chatgpt(prompt):
@@ -20,12 +20,12 @@ def chat_with_chatgpt(prompt):
           },
           json={
               "model": MODEL,
-              "prompt": prompt,
+              "messages": [{"role": "user", "content": prompt}],
               "max_tokens": MAX_TOKENS,
           }).json()
     if "error" in res:
         return res["error"]['message']
-    return res['choices'][0]['text']
+    return res['choices'][0]['message']['content']
 
 
 if __name__ == '__main__':
@@ -38,11 +38,9 @@ if __name__ == '__main__':
         help="\033[32m\033[1m\nURL link\033[0m"
     )
     url = parser.parse_args().url_link
-    # url = "https://e.vnexpress.net/news/business/companies/over-100-hcmc-residents-claim-defrauded-by-bank-insurance-firm-4596408.html"
     prompt = f"""
     Given the following article {url}\n
     Summarize it to maximum 1000 chars.
     """
     text = chat_with_chatgpt(prompt)
-    print(text)
-    # print(textwrap.fill(text, 80))
+    print(textwrap.fill(text, 80))
