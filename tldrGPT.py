@@ -12,17 +12,17 @@ MODEL = 'gpt-3.5-turbo'
 URL = f"https://api.openai.com/v1/chat/completions"
 
 
-def chat_with_chatgpt(prompt):
-    res = requests.post(URL,
-          headers = {
-              "Content-Type": "application/json",
-              "Authorization": f"Bearer {API_KEY}"
-          },
-          json={
-              "model": MODEL,
-              "messages": [{"role": "user", "content": prompt}],
-              "max_tokens": MAX_TOKENS,
-          }).json()
+def chat_with_chatgpt(prompt=''):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}"
+    }
+    json_payload = {
+        "model": MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": MAX_TOKENS,
+    }
+    res = requests.post(URL, headers=headers, json=json_payload).json()
     if "error" in res:
         return res["error"]['message']
     return res['choices'][0]['message']['content']
