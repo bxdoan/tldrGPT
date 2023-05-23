@@ -11,3 +11,9 @@ pip install -r requirements.txt
 ```bash
 python tldrGPT.py --url <url>
 ```
+
+or
+
+```bash
+./run.sh <url>
+```
