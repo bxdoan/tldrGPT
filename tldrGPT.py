@@ -30,7 +30,7 @@ def chat_with_chatgpt(prompt=''):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description="Scan all data from 2007 to now."
+        description="TLDR GPT-3.5",
     )
 
     parser.add_argument(
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     url = parser.parse_args().url_link
     prompt = f"""
     Given the following article {url}\n
-    Summarize it to maximum 1000 chars.
+    Summarize it to maximum 1000 worlds.
     """
     text = chat_with_chatgpt(prompt)
     print(textwrap.fill(text, 80))
