@@ -14,8 +14,6 @@ else
   echo "pipenv application not found"
 fi
 
-PYTHONPATH=`pwd` $pipenv run python tldrGPT.py -url $@
-
 if [[ -z "$pipenv" ]]; then
   echo "pipenv not found, run python directly"
   PYTHONPATH=`pwd` python3 "$SCRIPT_HOME/tldrGPT.py" -url "$@"
